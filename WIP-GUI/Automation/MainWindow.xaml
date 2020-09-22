@@ -1,0 +1,60 @@
+﻿<Window x:Class="Automation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Automation"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        Title="MainWindow" Height="560" Width="400">
+    <Border Padding="10">
+        <StackPanel>
+            <Border Padding="5">
+                <StackPanel>
+                    <Button x:Name="ClockButton" Click="ClockButton_Click" Margin="10 5 10 5" Content="24hr clock" />
+                    <Button x:Name="SetSaturdayButton" Click="SetSaturdayButton_Click" Margin="10 5 10 5" Content="Saturday first day of week" />
+                </StackPanel>
+            </Border>
+            <Border Padding="5">
+                <StackPanel>
+                    <Button x:Name="InputOrderButton" Click="InputOrderButton_Click" Margin="10 5 10 5" Content="Dvorak 1st US 2nd" />
+                    <Button x:Name="InputHotkeyButton" Click="InputHotkeyButton_Click" Margin="10 5 10 5" Content="Change Input Method with Alt-Shift" />
+                </StackPanel>
+            </Border>
+            <Border Padding="5">
+                <StackPanel>
+                    <Button x:Name="HideRecycleBinButton" Click="HideRecycleBinButton_Click" Margin="10 5 10 5" Content="Hide recycle bin from desktop" />
+                    <Button x:Name="PermanentDeleteButton" Click="PermanentDeleteButton_Click" Margin="10 5 10 5" Content="Don't move files to recycle bin" />
+                    <Button x:Name="DeleteConfirmationButton" Click="DeleteConfirmationButton_Click" Margin="10 5 10 5" Content="Display delete confirmation dialog" />
+                </StackPanel>
+            </Border>
+            <Border Padding="5">
+                <StackPanel>
+                    <Button x:Name="ShowExtensionsButton" Click="ShowExtensionsButton_Click" Margin="10 5 10 5" Content="Show known file extensions" />
+                    <Button x:Name="ThisPCButton" Click="ThisPCButton_Click" Margin="10 5 10 5" Content='Launch "This PC" with explorer' />
+                </StackPanel>
+            </Border>
+            <Border Padding="5">
+                <StackPanel>
+                    <Button x:Name="SmallIconsButton" Click="SmallIconsButton_Click" Margin="10 5 10 5" Content="Small taskbar icons" />
+                    <Button x:Name="ShowLabelsButton" Click="ShowLabelsButton_Click" Margin="10 5 10 5" Content="Show taskbar item labels" />
+                    <Button x:Name="HideSearchButton" Click="HideSearchButton_Click" Margin="10 5 10 5" Content="Hide Cortana/search button" />
+                    <Button x:Name="HideTaskViewButton" Click="HideTaskViewButton_Click" Margin="10 5 10 5" Content="Hide task view button" />
+                    <Button x:Name="HideSearchboxButton" Click="HideSearchboxButton_Click" Margin="10 5 10 5" Content="Hide searchbox" />
+                </StackPanel>
+            </Border>
+            <Border Padding="5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="ApplyPresetButton" Click="ApplyPresetButton_Click" Margin="10 5 10 5" Grid.Column="0" Content="Apply Preset" />
+                    <Button x:Name="RevertButton" Click="RevertButton_Click" Margin="10 5 10 5" Grid.Column="1" Content="Revert" />
+                    <Button x:Name="ApplyAllButton" Click="ApplyAllButton_Click" Margin="10 5 10 5" Grid.Column="2" Content="Apply All" />
+                </Grid>
+            </Border>
+        </StackPanel>
+    </Border>
+</Window>
