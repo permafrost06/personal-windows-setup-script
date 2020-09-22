@@ -1,6 +1,6 @@
 @echo off
-title Windows setup script
-echo Please wait until setup is complete
+title permafrost06 personal windows setup script
+echo Setting up...
 cd /D "%~dp0"
 
 rem 24hr clock
@@ -57,8 +57,8 @@ rem hide searchbox
 REG ADD HKCU\Software\Microsoft\Windows\CurrentVersion\Search /v SearchboxTaskbarMode /t REG_DWORD /D 0 /f
 
 rem delete taskbar icons
-DEL /F /S /Q /A "%AppData%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\*"
-REG DELETE HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband /F
+rem DEL /F /S /Q /A "%AppData%\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\*"
+rem REG DELETE HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband /F
 
 rem don't move files to recycle bin
 for /f %%a in ('REG QUERY "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\BitBucket\Volume"') do (
@@ -66,6 +66,28 @@ for /f %%a in ('REG QUERY "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentV
     REG ADD "%%a" /v NukeOnDelete /t REG_DWORD /D 1 /f
   )
 )
+
+rem 7-zip extensions setup
+set exts=001 7z arj bz2 bzip2 cpio deb dmg fat gz gzip hfs lha lzh lzma ntfs rar rpm squashfs swm tar taz tbz tbz tgz tpz txz wim xar xz z zip
+
+(for %%a in (%exts%) do (
+  assoc .%%a=7-Zip.%%a
+  ftype 7-Zip.%%a="D:\Software\7-Zip\7zFM.exe" "%%1"
+))
+
+rem set ahk extension
+assoc .ahk=AutoHotkey.ahk
+ftype AutoHotkey.ahk="D:\Software\AHK\AutoHotkeyU32" "%%1"
+
+rem set everything search
+D:\Software\Everything\Everything.exe -install-efu-association
+D:\Software\Everything\Everything.exe -install-run-on-system-startup
+D:\Software\Everything\Everything.exe -install-service
+D:\Software\Everything\Everything.exe -install-folder-context-menu
+D:\Software\Everything\Everything.exe -install-url-protocol
+
+rem set startup files
+xcopy D:\Software\Startup %APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup /QCY
 
 rem restart explorer
 taskkill /f /im explorer.exe
