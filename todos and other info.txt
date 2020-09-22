@@ -1,0 +1,51 @@
+skin
+folder options
+power options - choose what the lid does, sleep timer
+performance monitoring - CPU, RAM, GPU - usage, top processes (current and instant history), graphs
+show hide extensions
+show hide hidden files
+weather
+
+script
+enable startup items
+explorer opens "this pc" Computer\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\LaunchTo "1"
+no recycle bin Computer\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\BitBucket\Volume\{volume_id}\NukeOnDelete "1"
+show display confirmation dialog Computer\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\ConfirmFileDelete "1"
+taskbar small icons Computer\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarSmallIcons 1
+show labels unless taskbar full Computer\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarGlomLevel 1
+hide cortana and taskview button Computer\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\{ShowCortanaButton,ShowTaskViewButton} 0
+hide search Computer\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search\SearchboxTaskbarMode 0
+clean taskbar del HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband
+install directx .\DXSETUP.EXE /silent
+install vcpp batch file
+change directories Computer\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders\{Personal,Desktop,Downloads}
+hide protected os files Computer\HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowSuperHidden 1
+
+
+example file limit powershell script
+$Dir = "L:\TraceFiles"
+$MaxSize = 5120     #Specify in MB
+$Filter = "*.trc"
+
+$OldestFilesAll = Get-ChildItem $dir -Filter $Filter | Sort LastWriteTime 
+
+IF ($FolderCurrentSize -GT $MaxSize)
+{
+        foreach($File in $OldestFilesAll)
+        {
+
+        $OldestFileSingle = Get-ChildItem $dir -Filter $Filter | Sort LastWriteTime  | Select -First 1
+        $FolderCurrentSize = (Get-ChildItem $dir -recurse | Measure-Object -property length -sum).sum / 1MB
+
+        IF ($FolderCurrentSize -GT $MaxSize)
+                {
+                Write-output "Deleting File $OldestFileSingle, becuase the Current folder size $FolderCurrentSize MB, has exceeded the maximum size of $MaxSize MB"
+                Remove-Item $OldestFileSingle.FullName
+                }
+        }
+}
+
+ELSE
+{
+        Write-output "No deletes needed! Current folder size is $FolderCurrentSize MB, which is less than maximum size of $MaxSize MB"
+}
