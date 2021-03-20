@@ -53,6 +53,9 @@ REG ADD HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v Show
 rem hide task view button
 REG ADD HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v ShowTaskViewButton /t REG_DWORD /D 0 /f
 
+rem disable aero shake
+REG ADD HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v DisallowShaking /t REG_DWORD /D 1 /f
+
 rem hide searchbox
 REG ADD HKCU\Software\Microsoft\Windows\CurrentVersion\Search /v SearchboxTaskbarMode /t REG_DWORD /D 0 /f
 
