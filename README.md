@@ -1,8 +1,8 @@
 # personal-windows-setup-script
-I use this script to automatically install some essential software and make some changes on a fresh install of windows.
-Note: This script quietly installs microsoft visual c++ and directx but files for these are not included in this repository.
+I use this script to automatically set up some essential software and make some changes on a fresh install of windows.
 
 ## Effects:
+1. Quietly installs microsoft visual c++ and directx
 1. Change clock to 24h format
 1. Set first day of the week to saturday
 1. Add dvorak keyboard layout, set as default, change layout switch hotkey to ```ctrl+shift```

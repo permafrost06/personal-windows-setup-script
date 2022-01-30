@@ -3,6 +3,23 @@ title permafrost06 personal windows setup script
 echo Setting up...
 cd /D "%~dp0"
 
+rem install directx
+directx\DXSETUP.EXE /silent
+
+rem install visual c++ part 1
+for %%a in ("q\*") do (
+  if "%%~dpxa" NEQ "%~dpx0" (
+    "%%a" /q
+  )
+)
+
+rem install visual c++ part 2
+for %%a in ("quiet\*") do (
+  if "%%~dpxa" NEQ "%~dpx0" (
+    "%%a" /quiet
+  )
+)
+
 rem 24hr clock
 REG ADD "HKCU\Control Panel\International" /v sShortTime /t REG_SZ /D "HH:mm" /f
 REG ADD "HKCU\Control Panel\International" /v sTimeFormat /t REG_SZ /D "HH:mm:ss" /f
